@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estadísticas de Compra</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="./css/estadisticas.css">
+  <script src="./Boostrap/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="./Boostrap/css/bootstrap.min.css">
+  <link rel="icon" href="./graficos/imagenes/horizontes (2).ico" type="image/x-icon">
+</head>
+
+<body>
+  <header class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Encabezado de la página -->
+    <!-- ... -->
+  </header>
+
+  <div class="container">
+    <h1 class="text-center mt-4 text-white">Estadísticas de Compra</h1>
+
+    <div class="row mt-4">
+      <div class="col-md-6 text-white">
+        <h2>Tendencias de los Productos</h2>
+        <h4>Lo más comprados por períodos de semana y mes</h4>
+
+        <!-- Gráfico de tendencias semanales -->
+        <div class="chart-container" id="tendenciasSemanales"></div>
+        <br>
+        <!-- Gráfico de tendencias mensuales -->
+        <div class="chart-container" id="tendenciasMensuales"></div>
+      </div>
+
+      <div class="col-md-6 text-white">
+        <h2>Compras Realizadas por el Usuario</h2>
+        <h4>Seleccione el período:</h4>
+
+        <!-- Opciones de período -->
+        <div class="form-group">
+          <label for="periodo">Período:</label>
+          <select class="form-control" id="periodo">
+            <option value="semana">Semana</option>
+            <option value="mes">Mes</option>
+            <option value="quincena">Quincena</option>
+          </select>
+        </div>
+
+        <!-- Gráfico de compras del usuario -->
+        <div class="chart-container" id="comprasUsuario"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white py-4 mt-4">
+    <!-- Pie de página -->
+    <!-- ... -->
+  </footer>
+
+  <!-- Scripts de las bibliotecas para gráficos (Matplotlib y Plotly) -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="./js/plotly-latest.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/matplotlib-inline@0.1.2/matplotlib-inline.js"></script>
+  <script src="ruta/a/Chart.js"></script>
+
+  <!-- Script para generar las gráficas -->
+  <script>
+      // Obtener los datos necesarios para las gráficas
+      var semanas = [<%= semanasString %>]; // Array de semanas (ejemplo: ['Semana 1', 'Semana 2', 'Semana 3'])
+  var productosSemana = [<%= productosSemanaString %>]; // Array de cantidad de productos por semana
+  var meses = [<%= mesesString %>]; // Array de meses (ejemplo: ['Enero', 'Febrero', 'Marzo'])
+  var productosMes = [<%= productosMesString %>]; // Array de cantidad de productos por mes
+
+    // Generar gráfico de tendencias semanales
+  var ctxSemanal = document.getElementById('tendenciasSemanales').getContext('2d');
+    new Chart(ctxSemanal, {
+              type: 'bar',
+              data: {
+              labels: semanas,
+                      datasets: [{
+                      label: 'Tendencias semanales',
+                              data: productosSemana,
+                              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                              borderColor: 'rgba(75, 192, 192, 1)',
+                              borderWidth: 1
+                      }]
+              },
+              options: {
+              responsive: true,
+                      scales: {
+                      y: {
+                      beginAtZero: true
+                      }
+                      }
+              }
+          });
+
+          // Generar gráfico de tendencias mensuales
+            var ctxMensual = document.getElementById('tendenciasMensuales').getContext('2d');
+            new Chart(ctxMensual, {
+              type: 'line',
+              data: {
+              labels: meses,
+                      datasets: [{
+                      label: 'Tendencias mensuales',
+                              data: productosMes,
+                              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                              borderColor: 'rgba(255, 99, 132, 1)',
+                              borderWidth: 1
+                      }]
+              },
+              options: {
+              responsive: true,
+                      scales: {
+                      y: {
+                      beginAtZero: true
+                      }
+                      }
+              }
+      });
+
+      // Función para actualizar la gráfica de compras del usuario
+      function actualizarGraficaCompras(periodo) {
+              // Obtener los datos de compras por usuario según el período seleccionado
+              var datosCompras = obtenerDatosComprasUsuario(periodo); // Debes implementar esta función para obtener los datos de compras del usuario según el período seleccionado
+
+      // Generar gráfico de compras del usuario
+      var ctxCompras = document.getElementById('comprasUsuario').getContext('2d');
+      new Chart(ctxCompras, {
+      type: 'bar',
+              data: {
+              labels: datosCompras.labels,
+                      datasets: [{
+                      label: 'Compras del Usuario',
+                              data: datosCompras.data,
+                              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                              borderColor: 'rgba(255, 99, 132, 1)',
+                              borderWidth: 1
+                      }]
+              },
+              options: {
+              responsive: true,
+                      scales: {
+                      y: {
+                      beginAtZero: true
+                      }
+                      }
+              }
+      });
+                      }
+
+          // Evento para detectar cambios en la opción de período seleccionada
+            var selectPeriodo = document.getElementById('periodo');
+            selectPeriodo.addEventListener('change', function () {
+              var periodoSeleccionado = selectPeriodo.value;
+      actualizarGraficaCompras(periodoSeleccionado);
+                      });
+                      
+                              // Inicializar gráfica de compras del usuario con el período por defecto
+                              var periodoDefault = selectPeriodo.value;
+                              actualizarGraficaCompras(periodoDefault);
+                      </script>
+</body>
+
+</html>

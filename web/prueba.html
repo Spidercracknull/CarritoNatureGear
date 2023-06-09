@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Integración de PayPal</title>
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
+</head>
+<body>
+    <!-- Contenedor del botón de pago -->
+    <div id="paypal-button-container"></div>
+
+    <script>
+        // Renderizar el botón de pago de PayPal
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                // Lógica para crear el pedido
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '10.00' // Monto del pago
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                // Lógica para aprobar el pago
+                return actions.order.capture().then(function(details) {
+                    // Lógica para procesar el pago en el servidor y actualizar el estado del pedido
+                    console.log('Pago completado');
+                    console.log(details);
+                    // Aquí puedes enviar una solicitud al servidor para procesar el pago y actualizar tu sistema
+                });
+            },
+            onError: function(err) {
+                // Manejo de errores
+                console.log('Error al procesar el pago:');
+                console.log(err);
+            }
+        }).render('#paypal-button-container');
+    </script>
+</body>
+</html>

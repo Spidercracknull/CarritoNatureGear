@@ -1,0 +1,39 @@
+body {
+    background-image: url("../graficos/backgrounds/inicioB.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.card {
+    border: none;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.btn-danger {
+    width: 100%;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+.btn-info{
+    width: 100%;
+}
+
+.table {
+    margin-bottom: 20px;
+}
+
+.table thead th {
+    border-top: none;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+}

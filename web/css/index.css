@@ -1,0 +1,39 @@
+/*Color principal: Verde natural (#009933)
+
+Este color evoca la naturaleza y el entorno al aire libre. Representa la frescura, la vitalidad y la aventura.
+Color secundario: Azul agua (#33CCCC)
+
+El azul agua transmite la sensación de agua clara y limpia. Asociado con actividades acuáticas y deportes acuáticos, aporta calma y serenidad.
+Color complementario: Gris montaña (#666666)
+
+El gris montaña simboliza la solidez y la resistencia de las montañas. Representa la durabilidad y la calidad de los productos para actividades al aire libre.
+Color de acento: Naranja aventura (#FF9900)
+
+El naranja aventura agrega energía y emoción a la paleta. Es un color llamativo que evoca la pasión y la emoción de las aventuras al aire libre.*/
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body {
+    background-image: url("../graficos/backgrounds/inicioB.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.content {
+    flex: 1;
+    padding-bottom: 100px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+}

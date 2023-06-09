@@ -1,0 +1,22 @@
+body {
+    background-image: url("../graficos/backgrounds/inicioB.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.btn-danger {
+    width: 100%;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+.btn-secondary {
+    width: 100%;
+}
+
+.btn-info {
+    width: 100%;
+}

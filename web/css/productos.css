@@ -1,0 +1,64 @@
+body {
+    background-image: url("../graficos/backgrounds/inicioB.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.card-img-top {
+    height: 200px;
+    /* Establece la altura deseada */
+    object-fit: contain;
+    /* Ajusta la imagen para contener el tamaño */
+}
+
+.card {
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.card:hover {
+    background-color: #f8f9fa;
+    color: #333;
+    transform: scale(1.05);
+}
+
+
+.card-title {
+    font-weight: bold;
+}
+
+.card-text {
+    color: #666;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card:hover .btn {
+    opacity: 1;
+}
+
+
+
